@@ -1,0 +1,21 @@
+{
+  "name": "wetube-reloaded-2",
+  "version": "1.0.0",
+  "description": "The Best Way To Watch Videos.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noah-TaeHwan/wetube-reloaded-2.git"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Noah (TH)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Noah-TaeHwan/wetube-reloaded-2/issues"
+  },
+  "homepage": "https://github.com/Noah-TaeHwan/wetube-reloaded-2#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
