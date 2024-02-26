@@ -6,7 +6,7 @@ const app = express();
 
 const handleHome = (req, res) => {
   console.log('Somebody is trying to go home.');
-  return res.send('Hello');
+  return res.send('<h1>Hello</h1>');
 };
 
 const handleLogin = (req, res) => {
