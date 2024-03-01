@@ -25,10 +25,21 @@ export const getEdit = async (req, res) => {
   }
 };
 
-export const postEdit = (req, res) => {
+export const postEdit = async (req, res) => {
   const { id } = req.params;
-  const { title } = req.body;
-  return res.redirect(`/videos/${id}`);
+  const { title, description, hashtags } = req.body;
+  try {
+    await Video.findByIdAndUpdate(id, {
+      title,
+      description,
+      hashtags: hashtags
+        .split(',')
+        .map((word) => (word.startsWith('#') ? word : `#${word}`)),
+    });
+    return res.redirect(`/videos/${id}`);
+  } catch (error) {
+    return res.render('404', { pageTitle: `Not Found ${id}` });
+  }
 };
 
 export const getUpload = (req, res) => {
@@ -41,7 +52,9 @@ export const postUpload = async (req, res) => {
     await Video.create({
       title,
       description,
-      hashtags: hashtags.split(',').map((word) => `#${word}`),
+      hashtags: hashtags
+        .split(',')
+        .map((word) => (word.startsWith('#') ? word : `#${word}`)),
     });
     return res.redirect('/');
   } catch (error) {
