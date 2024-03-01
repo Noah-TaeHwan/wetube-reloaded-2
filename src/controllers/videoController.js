@@ -60,3 +60,13 @@ export const postUpload = async (req, res) => {
     });
   }
 };
+
+export const deleteVideo = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await Video.findByIdAndDelete(id);
+  } catch (error) {
+    return res.render('404', { pageTitle: `Not Found ${id}` });
+  }
+  return res.redirect('/');
+};
