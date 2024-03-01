@@ -26,6 +26,7 @@ const videoSchema = new mongoose.Schema({
 videoSchema.static('formatHashtags', function (hashtags) {
   return hashtags
     .split(',')
+    .map((word) => word.trim()) // 공백 제거
     .map((word) => (word.startsWith('#') ? word : `#${word}`));
 });
 
