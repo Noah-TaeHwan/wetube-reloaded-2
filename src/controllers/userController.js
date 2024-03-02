@@ -1,4 +1,26 @@
-export const join = (req, res) => res.send('Join');
+import User from '../models/User';
+
+export const getJoin = (req, res) => {
+  return res.render('join', { pageTitle: 'Join' });
+};
+
+export const postJoin = async (req, res) => {
+  const { name, username, email, password, location } = req.body;
+  try {
+    await User.create({
+      name,
+      username,
+      email,
+      password,
+      location,
+    });
+    return res.redirect('/login');
+  } catch (error) {
+    console.log(req.body);
+    return res.render('404', { pageTitle: `Not Found` });
+  }
+};
+
 export const edit = (req, res) => res.send('Edit User');
 export const remove = (req, res) => res.send('Remove User');
 export const login = (req, res) => res.send('Log In');
