@@ -14,10 +14,9 @@ const userSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  socialOnly: { type: Boolean, default: false },
   password: {
     type: String,
-    required: true,
-    trim: true,
   },
   name: {
     type: String,
