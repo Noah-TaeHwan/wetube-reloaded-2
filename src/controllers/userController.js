@@ -122,7 +122,7 @@ export const finishGithubLogin = async (req, res) => {
     if (!user) {
       user = await User.create({
         name: userData.name ? userData.name : userData.login,
-        avatarUrl: userData.avatar_Url,
+        avatarUrl: userData.avatar_url,
         username: userData.login,
         email: emailObj.email,
         password: '',
@@ -150,23 +150,35 @@ export const getEdit = (req, res) => {
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, avatarUrl },
     },
     body: { name, email, username, location },
+    file,
   } = req;
-  await User.findByIdAndUpdate(_id, {
-    name,
-    email,
-    username,
-    location,
-  });
+
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      // 업로드된 파일이 있으면 /uploads/와 파일명을 결합, 없으면 기존 avatarUrl 사용
+      avatarUrl: file ? `/uploads/${file.filename}` : avatarUrl,
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true } // 업데이트된 문서를 반환하도록 설정
+  );
+
+  // 세션 정보 업데이트
   req.session.user = {
     ...req.session.user,
-    name,
-    email,
-    username,
-    location,
+    avatarUrl: updatedUser.avatarUrl,
+    name: updatedUser.name,
+    email: updatedUser.email,
+    username: updatedUser.username,
+    location: updatedUser.location,
   };
+
   return res.redirect('/users/edit');
 };
 
