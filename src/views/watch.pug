@@ -4,6 +4,7 @@ block content
     div
         p=video.description
         small=video.createdAt
+<<<<<<< HEAD
     div
         small Uploaded by 
             a(href=`/users/${video.owner._id}`)=video.owner.name
@@ -11,3 +12,8 @@ block content
         a(href=`${video.id}/edit`) Edit Video &rarr;
         br
         a(href=`${video.id}/delete`) Delete Video &rarr;
+=======
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    br
+    a(href=`${video.id}/delete`) Delete Video &rarr;
+>>>>>>> parent of 509a178 (#8.11 Video Owner)
