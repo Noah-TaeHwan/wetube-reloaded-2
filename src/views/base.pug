@@ -1,4 +1,4 @@
-doctype html 
+doctype html
 html(lang="ko")
     head
         title #{pageTitle} | #{siteName}
@@ -6,27 +6,27 @@ html(lang="ko")
     body
         header
             h1=pageTitle
-            nav 
-                ul 
-                    li 
+            nav
+                ul
+                    li
                         a(href="/") Home
-                    li 
-                        a(href='/search') Search
-                    if loggedIn 
-                        li 
-                            a(href="/videos/upload") Upload Video                    
-                        li 
-                            a(href="/my-profile") #{loggedInUser.name}'s Profile
+                    if loggedIn
+                        li
+                            a(href="/videos/upload") Upload Video
+                        li
+                            a(href=`/users/${loggedInUser._id}`) My Profile
                         li
                             a(href="/users/edit") Edit Profile
-                        li 
-                            a(href="/users/logout") Log Out
+                        li
+                            a(href="/users/logout")  Log Out
                     else
-                        li 
-                            a(href="/join") Join
-                        li 
-                            a(href="/login") Log In                        
+                        li
+                            a(href="/join")  Join
+                        li
+                            a(href="/login")  Login                        
+                    li
+                        a(href="/search") Search
                     
         main
             block content
-    include ./partials/footer
+    include partials/footer

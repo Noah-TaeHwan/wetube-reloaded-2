@@ -1,16 +1,15 @@
-import { redirect } from 'express/lib/response';
 import multer from 'multer';
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
-  res.locals.siteName = 'wetube2';
+  res.locals.siteName = 'Wetube';
   res.locals.loggedInUser = req.session.user || {};
   next();
 };
 
 export const protectorMiddleware = (req, res, next) => {
   if (req.session.loggedIn) {
-    next();
+    return next();
   } else {
     return res.redirect('/login');
   }
