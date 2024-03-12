@@ -21,7 +21,7 @@ export const postJoin = async (req, res) => {
   }
   try {
     await User.create({
-      name,
+      name: userData.name ? userData.name : userData.login,
       username,
       email,
       password,
