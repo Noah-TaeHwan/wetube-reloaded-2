@@ -26,7 +26,6 @@ const handleSubmit = async (event) => {
   if (text === '') {
     return;
   }
-
   const response = await fetch(`/api/videos/${videoId}/comment`, {
     method: 'POST',
     headers: {
